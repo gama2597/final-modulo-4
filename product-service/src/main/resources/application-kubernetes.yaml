@@ -9,7 +9,7 @@ server:
 spring:
   application:
     name: product-service
-  
+
   # ============================================
   # DATASOURCE - ProductDB
   # ============================================
@@ -22,7 +22,7 @@ spring:
       maximum-pool-size: ${POOL_SIZE:10}
       minimum-idle: 5
       connection-timeout: 20000
-  
+
   # ============================================
   # JPA CONFIGURATION
   # ============================================
@@ -72,4 +72,13 @@ logging:
 # Formato: http://<service-name>.<namespace>.svc.cluster.local
 user:
   service:
-     url: ${USER_SERVICE_URL:http://user-service.user-service.svc.cluster.local}
+    url: ${USER_SERVICE_URL:http://user-service.user-service.svc.cluster.local}
+
+# ============================================
+# SYSTEM CREDENTIALS FOR M2M COMMUNICATION
+# ============================================
+app:
+  security:
+    system-account:
+      username: ${SYSTEM_USER:juan.perez@example.com} # Pon aquí el correo de un ADMIN real de tu BD
+      password: ${SYSTEM_PASS:admin123} # Pon aquí su contraseña

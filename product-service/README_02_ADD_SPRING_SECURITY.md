@@ -350,7 +350,7 @@ kubectl logs -f <POD_NAME> -n product-service
 
 ```
 # Endpoint público → 200
-curl http://localhost:30082/api/products
+curl.exe http://localhost:30082/api/products
 
 # POST sin auth → 401
 curl -X POST http://localhost:30082/api/products \

@@ -1,20 +1,20 @@
 # ============================================
 # APPLICATION CONFIGURATION FOR KUBERNETES
 # ============================================
-# Product Service - Configuración para Kubernetes
+# Order Service - Configuración para Kubernetes
 
 server:
-  port: 8082
+  port: 8083
 
 spring:
   application:
-    name: product-service
-
+    name: order-service
+  
   # ============================================
-  # DATASOURCE - ProductDB
+  # DATASOURCE - OrderDB
   # ============================================
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5433/productdb}
+    url: ${DB_URL:jdbc:postgresql://host.docker.internal:5435/orderdb}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
@@ -22,7 +22,7 @@ spring:
       maximum-pool-size: ${POOL_SIZE:10}
       minimum-idle: 5
       connection-timeout: 20000
-
+  
   # ============================================
   # JPA CONFIGURATION
   # ============================================
@@ -62,23 +62,15 @@ management:
 # ============================================
 logging:
   level:
-    com.tecsup.app.micro.product: ${LOG_LEVEL:INFO}
+    com.tecsup.app.micro.order: ${LOG_LEVEL:INFO}
     org.hibernate.SQL: ${SQL_LOG_LEVEL:WARN}
 
 # ============================================
-# USER SERVICE URL - Comunicación entre servicios
+# PRODUCT SERVICE URL - Comunicación entre servicios
 # ============================================
 # En Kubernetes, usar DNS interno
 # Formato: http://<service-name>.<namespace>.svc.cluster.local
-user:
-  service:
-    url: ${USER_SERVICE_URL:http://localhost:8081}
-
-# ============================================
-# SYSTEM CREDENTIALS FOR M2M COMMUNICATION
-# ============================================
 app:
-  security:
-    system-account:
-      username: ${SYSTEM_USER:juan.perez@example.com} # Pon aquí el correo de un ADMIN real de tu BD
-      password: ${SYSTEM_PASS:admin123} # Pon aquí su contraseña
+  client:
+    product-service:
+      url: ${PRODUCT_SERVICE_URL:http://product-service.product-service.svc.cluster.local:8082}

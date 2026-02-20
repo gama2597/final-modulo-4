@@ -203,7 +203,7 @@ docker run -p 8082:8082 \
   product-service:1.0
 
 # En otra terminal, probar
-curl http://localhost:8082/actuator/health
+curl.exe http://localhost:8082/actuator/health
 
 # Ctrl+C para detener
 ```
