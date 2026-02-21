@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class OrderItem {
 
-    // AGREGADO: Necesario para identificar la fila en la BD (tu PK id)
     private Long id;
 
     private Long productId;
@@ -21,7 +20,7 @@ public class OrderItem {
     private BigDecimal unitPrice;
     private BigDecimal subtotal;
 
-    // Este campo NO se guarda en BD, es para mostrar detalles al cliente
+    // Es para mostrar detalles al cliente
     private Product productDetails;
 
     /**

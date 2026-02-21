@@ -16,14 +16,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class OrderItemResponse {
 
-    // 1. Agregamos el ID del ítem (la llave primaria de order_items)
     private Long id;
 
-    // 2. Ocultamos el productId suelto para que no ensucie el JSON
     @JsonIgnore
     private Long productId;
 
-    // 3. ¡LA MAGIA! Renombramos "productDetails" a "product" en el JSON
     @JsonProperty("product")
     private Product productDetails;
 

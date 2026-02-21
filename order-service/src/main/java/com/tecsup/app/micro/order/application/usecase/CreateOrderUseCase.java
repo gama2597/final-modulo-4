@@ -35,20 +35,19 @@ public class CreateOrderUseCase {
 
         // 2. Procesar cada ítem (validar stock y obtener precio real)
         for (OrderItem item : order.getItems()) {
-            // Llamada al puerto externo (ProductService)
+            // Llamada al product-service
             Product productInfo = productServicePort.getProductById(item.getProductId());
 
-            // Regla de Negocio: Validar Stock
+            // Validar Stock
             if (productInfo.getStock() < item.getQuantity()) {
                 throw new StockNotAvailableException(
                         "Stock insuficiente para el producto: " + productInfo.getName());
             }
 
-            // Regla de Negocio: Usar siempre el precio actual del sistema, NO el del
-            // frontend
+            // Usar siempre el precio actual del sistema
             item.setUnitPrice(productInfo.getPrice());
 
-            // Calcular subtotal del ítem (método del dominio)
+            // Calcular subtotal del ítem
             item.calculateSubtotal();
 
             // Opcional: Guardar detalles del producto para responder al cliente (no se
@@ -56,12 +55,10 @@ public class CreateOrderUseCase {
             item.setProductDetails(productInfo);
         }
 
-        // 3. Calcular total de la orden (método del dominio)
+        // 3. Calcular total de la orden
         order.calculateTotal();
 
         // 4. Completar datos de auditoría y estado
-        // Genera un número aleatorio de 3 dígitos con ceros a la izquierda (ej. 007,
-        // 042, 999)
         String randomNum = String.format("%03d", (int) (Math.random() * 1000));
 
         // Crea el formato: ORD-2026-042
@@ -70,7 +67,7 @@ public class CreateOrderUseCase {
         order.setCreatedAt(LocalDateTime.now());
         order.setUpdatedAt(LocalDateTime.now());
 
-        // 5. Guardar en BD a través del puerto
+        // 5. Guardar en BD
         Order savedOrder = orderRepository.save(order);
 
         for (int i = 0; i < order.getItems().size(); i++) {

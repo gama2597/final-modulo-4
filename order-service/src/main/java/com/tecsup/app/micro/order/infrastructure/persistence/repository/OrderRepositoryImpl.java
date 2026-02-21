@@ -56,4 +56,4 @@ public class OrderRepositoryImpl implements OrderRepositoryPort {
         log.debug("Validando existencia de orden por id: {}", id);
         return jpaOrderRepository.existsById(id);
     }
-} 
+}

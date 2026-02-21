@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-/**
- * Value Object que representa la data que viene del ProductService.
- */
 @Data
 @Builder
 @NoArgsConstructor

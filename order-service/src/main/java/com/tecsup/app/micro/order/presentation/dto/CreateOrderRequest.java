@@ -16,10 +16,10 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateOrderRequest {
 
-    @NotNull(message = "User ID is required")
+    @NotNull(message = "User ID es obligatorio")
     private Long userId;
 
-    @NotEmpty(message = "Order must have at least one item")
-    @Valid // Valida cada elemento de la lista
+    @NotEmpty(message = "Orden debe contener al menos un item")
+    @Valid
     private List<OrderItemRequest> items;
 }

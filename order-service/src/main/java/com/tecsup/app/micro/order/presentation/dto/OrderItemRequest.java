@@ -17,6 +17,6 @@ public class OrderItemRequest {
     private Long productId;
 
     @NotNull(message = "Quantity es requerido")
-    @Min(value = 1, message = "Quantity must be at least 1")
+    @Min(value = 1, message = "Quantity debe ser al menos 1")
     private Integer quantity;
 }

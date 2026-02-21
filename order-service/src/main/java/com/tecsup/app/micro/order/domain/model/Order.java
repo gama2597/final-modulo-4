@@ -17,21 +17,17 @@ import java.util.List;
 public class Order {
 
     private Long id;
-    private String orderNumber; // UUID único para rastreo
+    private String orderNumber; // UUID único
 
-    // --- NUEVOS CAMPOS AGREGADOS ---
-    private Long userId; // ID del usuario que compró (viene de user-service)
+    private Long userId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    // -------------------------------
 
     private String status; // PENDING, COMPLETED, CANCELLED
     private BigDecimal totalAmount;
 
     @Builder.Default
     private List<OrderItem> items = new ArrayList<>();
-
-    // --- MÉTODOS DE NEGOCIO ---
 
     public void calculateTotal() {
         this.totalAmount = items.stream()

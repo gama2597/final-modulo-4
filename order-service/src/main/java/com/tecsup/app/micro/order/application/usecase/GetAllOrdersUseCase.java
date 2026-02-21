@@ -13,20 +13,20 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class GetOrdersByUserUseCase {
+public class GetAllOrdersUseCase {
 
     private final OrderRepositoryPort orderRepository;
-    private final ProductServicePort productService;
+    private final ProductServicePort productServicePort;
 
-    public List<Order> execute(Long userId) {
-        List<Order> orders = orderRepository.findByUserId(userId);
+    public List<Order> execute() {
+        List<Order> orders = orderRepository.findAll();
 
         orders.forEach(order -> {
             if (order.getItems() != null) {
                 order.getItems().forEach(item -> {
                     try {
-                        var productDetails = productService.getProductById(item.getProductId());
-                        item.setProductDetails(productDetails);
+                        var productInfo = productServicePort.getProductById(item.getProductId());
+                        item.setProductDetails(productInfo);
                     } catch (Exception e) {
                         log.warn("Producto con ID {} no encontrado para la orden {}. Asignando valores por defecto.",
                                 item.getProductId(), order.getId());

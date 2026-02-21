@@ -2,6 +2,7 @@ package com.tecsup.app.micro.order.application.service.impl;
 
 import com.tecsup.app.micro.order.application.service.OrderApplicationService;
 import com.tecsup.app.micro.order.application.usecase.CreateOrderUseCase;
+import com.tecsup.app.micro.order.application.usecase.GetAllOrdersUseCase;
 import com.tecsup.app.micro.order.application.usecase.GetOrderByIdUseCase;
 import com.tecsup.app.micro.order.application.usecase.GetOrdersByUserUseCase;
 import com.tecsup.app.micro.order.domain.model.Order;
@@ -24,6 +25,7 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
     private final CreateOrderUseCase createOrderUseCase;
     private final GetOrderByIdUseCase getOrderByIdUseCase;
     private final GetOrdersByUserUseCase getOrdersByUserUseCase;
+    private final GetAllOrdersUseCase getAllOrdersUseCase;
 
     @Override
     @Transactional
@@ -41,5 +43,11 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
     @Transactional(readOnly = true)
     public List<Order> getOrdersByUser(Long userId) {
         return getOrdersByUserUseCase.execute(userId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Order> getAllOrders() {
+        return getAllOrdersUseCase.execute();
     }
 }

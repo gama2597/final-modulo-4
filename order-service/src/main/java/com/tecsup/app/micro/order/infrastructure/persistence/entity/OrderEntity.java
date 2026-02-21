@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "orders") // Usamos "orders" porque "order" suele ser palabra reservada en SQL
+@Table(name = "orders")
 @Getter
 @Setter
 @AllArgsConstructor

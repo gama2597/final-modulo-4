@@ -35,7 +35,6 @@ public class ProductClient implements ProductServicePort {
             ProductResponseDto response = restTemplate.getForObject(url, ProductResponseDto.class);
             log.info("Producto recuperado exitosamente de product-service: {}", response);
             
-            // Usamos MapStruct para la conversión!
             return productClientMapper.toDomain(response);
             
         } catch (HttpClientErrorException e) {

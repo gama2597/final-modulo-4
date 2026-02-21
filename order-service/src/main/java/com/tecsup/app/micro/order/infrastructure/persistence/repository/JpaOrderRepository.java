@@ -9,7 +9,6 @@ import java.util.List;
 @Repository
 public interface JpaOrderRepository extends JpaRepository<OrderEntity, Long> {
     
-    // Spring Data JPA crea la query automáticamente con solo nombrar bien el método
     List<OrderEntity> findByUserId(Long userId);
     
 }

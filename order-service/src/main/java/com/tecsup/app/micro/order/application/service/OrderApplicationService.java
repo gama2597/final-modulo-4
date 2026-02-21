@@ -6,7 +6,7 @@ import java.util.List;
 public interface OrderApplicationService {
 
     /**
-     * Crea una nueva orden procesando reglas de negocio
+     * Crea una nueva orden
      */
     Order createOrder(Order order);
 
@@ -19,4 +19,6 @@ public interface OrderApplicationService {
      * Lista las órdenes de un usuario específico
      */
     List<Order> getOrdersByUser(Long userId);
+
+    List<Order> getAllOrders();
 }

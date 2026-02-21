@@ -25,25 +25,32 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<OrderResponse> createOrder(@Valid @RequestBody CreateOrderRequest request) {
-        log.info("REST request to create order for user: {}", request.getUserId());
-        
+        log.info("REST para crear orden: {}", request.getUserId());
+
         Order orderToCreate = orderDtoMapper.toDomain(request);
         Order createdOrder = orderApplicationService.createOrder(orderToCreate);
-        
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(orderDtoMapper.toResponse(createdOrder));
     }
 
+    @GetMapping
+    public ResponseEntity<List<OrderResponse>> getAllOrders() {
+        log.info("REST para obtener todas las ordenes");
+        List<Order> orders = orderApplicationService.getAllOrders();
+        return ResponseEntity.ok(orderDtoMapper.toResponseList(orders));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<OrderResponse> getOrderById(@PathVariable Long id) {
-        log.info("REST request to get order by id: {}", id);
+        log.info("REST para obtener orden por ID: {}", id);
         Order order = orderApplicationService.getOrderById(id);
         return ResponseEntity.ok(orderDtoMapper.toResponse(order));
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<OrderResponse>> getOrdersByUser(@PathVariable Long userId) {
-        log.info("REST request to get orders by user: {}", userId);
+        log.info("REST para obtener ordenes por usuario: {}", userId);
         List<Order> orders = orderApplicationService.getOrdersByUser(userId);
         return ResponseEntity.ok(orderDtoMapper.toResponseList(orders));
     }

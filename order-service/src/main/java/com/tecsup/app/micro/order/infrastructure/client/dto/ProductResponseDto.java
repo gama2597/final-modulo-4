@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-/**
- * Este DTO refleja exactamente el JSON que devuelve el GET /api/products/{id}
- * del microservicio product-service.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
